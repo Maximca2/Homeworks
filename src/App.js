@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import React from 'react';
+import MainPage from './components/MainPage/MainPage';
+import Container from 'react-bootstrap/esm/Container';
+
+// REdux
+// Корзина дані з Redux
+
+// дефолтні дані закинути в редакс і після цього ти їм отримуєш і відмальовуєш на головній сторінці
+
+// після кліку на "добавити в корзину", ти добавляєш цей айтем в редактс. І в самій корзині ти берез ці дані з редаксу
+
+// git навчится робити гілки пул реквест ну і пушити нормально
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <MainPage />
+      </Container>
     </div>
   );
 }
-
 export default App;
