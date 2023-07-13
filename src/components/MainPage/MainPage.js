@@ -19,7 +19,7 @@ const MainPage = (props) => {
     const products = useSelector(state => state.items.it)
     const [show, setShow] = useState(false)
     const curProducts = useSelector(state => state.items.basket)
-
+    console.log('провірка на зміну')
     const addToCart = (product) => {
         const curIt = {
             product,
