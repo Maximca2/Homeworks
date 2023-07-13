@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
+import Basket from '../Basket';
+import { useDispatch, useSelector } from 'react-redux'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
-// не дефолт імп не юзати по дефолту
-import { Col, Row } from 'react-bootstrap/esm';
-
-import Basket from '../Basket';
-
-import logo from '../MainPage/img/logo.png'
-
 import style from './MainPage.module.scss'
-import { useDispatch, useSelector } from 'react-redux'
-// правильна структура
+// не дефолт імп не юзати по дефолту
 
+// правильна структура
 
 const MainPage = (props) => {
 
@@ -39,7 +34,7 @@ const MainPage = (props) => {
                     <header className={style.box__header}>
                         <div className={style.box__ofheader}>
                             <div className="">
-                                <img src={logo} alt="logo" />
+                                {/* <img src={logo} alt="logo" /> */}
                             </div>
                             <div className={style.box__nameofCompany}>
                                 Bags
