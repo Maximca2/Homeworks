@@ -1,4 +1,8 @@
 import imf from '../../img/bag_rose.jpg'
+const ADD_TO_BASKET = 'ADD_TO_BASKET'
+const REMOVE_FROM_BASKET = 'REMOVE_FROM_BASKET'
+const DATA_NOT_CHANGED = 'DATA_NOT_CHANGED'
+const LOCAL_STORAGE_KEY = 'OUR_STORAGE_ITEMS'
 const product = [
     {
         name: 'Сумка',
@@ -31,23 +35,27 @@ const product = [
         img: imf
     },
 ]
-const ADD_TO_BASKET = 'ADD_TO_BASKET'
-const REMOVE_FROM_BASKET = 'REMOVE_FROM_BASKET'
 
-const defaultState = {
+let defaultState = {
     it: product,
-    basket: [],
-    
+    basket: localStorage.getItem(LOCAL_STORAGE_KEY)?JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)):[],
+
 }
-export const itemsReducer = (state = defaultState, {payload,type}) => {
+
+export const itemsReducer = (state = defaultState, { payload, type }) => {
     switch (type) {
 
         case ADD_TO_BASKET:
-            return { ...state, basket: [...state.basket, payload] }
-
+            localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(state.basket))
+            return   { ...state, basket: [...state.basket, payload] } 
         case REMOVE_FROM_BASKET:
 
-            return { ...state, basket:state.basket.filter(it=>it.product.id!==payload) }
+            return { ...state, basket: state.basket.filter(it => it.product.id !== payload) }
+
+
+        case DATA_NOT_CHANGED:
+            return { ...state, basket: [...state.basket, payload] }
+
         default:
             return state
     }
