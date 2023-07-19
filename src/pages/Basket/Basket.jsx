@@ -10,13 +10,10 @@ const Basket = (props) => {
 
   const { show } = useContext(ProductContext);
   const { cartItems, setCartItems } = useContext(ProductContext);
-
   const Products = props.products
 
-
-  console.log(Products);
-  function deleteIt(id) {
-    const data = cartItems.filter((it) => it.id !== id);
+  function deleteIt(name) {
+    const data = cartItems.filter((it) => it.name !== name);
     setCartItems(data)
     
   }
@@ -42,7 +39,7 @@ const Basket = (props) => {
                   <div className="">{price}</div>
                   <Button className={style.button41}>Купити</Button>
                   <Button
-                    onClick={() => deleteIt(i)}
+                    onClick={() => deleteIt(name)}
                     className={style.button42}
                   >
                     Видалити

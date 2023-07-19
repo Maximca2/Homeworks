@@ -1,17 +1,16 @@
-import React, { useContext } from "react";
-import { Button } from "react-bootstrap";
+import React, { useContext} from "react";
 import Container from "react-bootstrap/Container";
 
 import Basket from "../Basket";
 import ProductContext from "../../Context/Context-product";
+import OtherProduct from "../Otherproduct/OtherProduct";
+import Pagination from "../../components/Pagination/Pagination";
 
 import style from "./MainPage.module.scss";
-
-
 const MainPage = () => {
-  const { product } = useContext(ProductContext);
   const { setShow } = useContext(ProductContext);
   const { cartItems, setCartItems } = useContext(ProductContext);
+  const { setCurentPage } = useContext(ProductContext);
 
   const addToCart = (product) => {
     setCartItems([...cartItems, product]);
@@ -19,6 +18,9 @@ const MainPage = () => {
 
   function showBasket(cond) {
     setShow(cond);
+  }
+  function paginate(number) {
+    setCurentPage(number);
   }
   return (
     <div>
@@ -31,24 +33,10 @@ const MainPage = () => {
           </header>
           <main>
             <div className={style.box__list}>
-              {product.map((it, i) => {
-                const { name, img, price } = it;
-                return (
-                  <div key={i} className={style.box__card}>
-                    <div className={style.box__img}>
-                      <img src={img} alt="img_bags" />
-                    </div>
-                    <div className="">{name}</div>
-                    <div className="">{price}</div>
-                    <Button
-                      className={style.button41}
-                      onClick={() => addToCart(it)}
-                    >
-                      SHOP NOW!
-                    </Button>
-                  </div>
-                );
-              })}
+              <OtherProduct addToCart={addToCart} />
+              <nav>
+                <Pagination paginate={paginate}/>
+              </nav>
             </div>
           </main>
           <div className={style.box__navigation}>
@@ -70,5 +58,4 @@ const MainPage = () => {
     </div>
   );
 };
-
 export default MainPage;
