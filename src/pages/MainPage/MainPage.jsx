@@ -1,74 +1,45 @@
-import React, { useState } from "react";
-import { Routes, NavLink, Route } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Basket from "../Basket";
+import React, { useContext } from "react";
+import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
+
+import Basket from "../Basket";
+import ProductContext from "../../Context/Context-product";
+
 import style from "./MainPage.module.scss";
 
-const MainPage = (props) => {
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.items.it);
-  const [show, setShow] = useState(true);
-  const curProducts = useSelector((state) => state.items.basket);
-  
+
+const MainPage = () => {
+  const { product } = useContext(ProductContext);
+  const { setShow } = useContext(ProductContext);
+  const { cartItems, setCartItems } = useContext(ProductContext);
+
   const addToCart = (product) => {
-    const curIt = {
-      product,
-      data: Date.now(),
-    };
-    dispatch({ type: "ADD_TO_BASKET", payload: curIt });
+    setCartItems([...cartItems, product]);
   };
 
   function showBasket(cond) {
-    window.localStorage.setItem("MY_APP_STATE", JSON.stringify(show));
     setShow(cond);
   }
-  useEffect(() => {
-    const data = window.localStorage.getItem("MY_APP_STATE");
-    console.log("data", data);
-
-    if (data !== null) setShow(JSON.parse(data));
-  }, []);
-  function clearHistory() {
-    window.localStorage.clear();
-  }
-
   return (
     <div>
       <Container>
         <div className={style.box}>
           <header className={style.box__header}>
             <div className={style.box__ofheader}>
-              <div
-                className={style.box__nameofCompany}
-                onClick={() => clearHistory()}
-              >
-                Bags
-              </div>
+              <div className={style.box__nameofCompany}>Bags</div>
             </div>
           </header>
           <main>
             <div className={style.box__list}>
-              {products.map((it, i) => {
+              {product.map((it, i) => {
+                const { name, img, price } = it;
                 return (
                   <div key={i} className={style.box__card}>
-                    <div className="">
-                      <i
-                        className="fa fa-heart"
-                        style={{
-                          fontSize: 24,
-                          textAlign: "right",
-                          color: "#fff",
-                        }}
-                      />
-                    </div>
                     <div className={style.box__img}>
-                      <img src={it.img} alt="img_bags" />
+                      <img src={img} alt="img_bags" />
                     </div>
-                    <div className="">{it.name}</div>
-                    <div className="">{it.price}</div>
+                    <div className="">{name}</div>
+                    <div className="">{price}</div>
                     <Button
                       className={style.button41}
                       onClick={() => addToCart(it)}
@@ -84,19 +55,16 @@ const MainPage = (props) => {
             <nav>
               <div className={style.box__search}>Шукати</div>
               <div className={style.box__search}>Подобається</div>
+              className={style.box__search}
               <div
                 onClick={() => showBasket(false)}
-                className={style.box__search}
+                className={style.box__link}
               >
-                <NavLink className={style.box__link} to="/basket">
-                  Корзина {curProducts.length}
-                </NavLink>
+                Корзина
               </div>
             </nav>
           </div>
-          <Routes>
-            <Route path="/basket" element={<Basket showsBasket={show} />} />
-          </Routes>
+          <Basket products={cartItems} />
         </div>
       </Container>
     </div>

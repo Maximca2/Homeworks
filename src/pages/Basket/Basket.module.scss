@@ -90,3 +90,13 @@
       background: #ffa277;
     }
   }
+
+.active{
+  transition: all 1s ease-out ;
+  transform: translate(0px,0px);
+}
+
+.notactive{
+  transition: all 1s ease-out ;
+  transform: translate(-5000px,0px);
+}
