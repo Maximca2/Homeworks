@@ -33,8 +33,10 @@
     }
     &__list{
         display: flex;
+        flex-wrap: wrap;
         gap: 40px;
         margin-bottom: 50px;
+        // padding-left: 100px;
     }
     &__ofheader{
         width: 50%;
@@ -62,6 +64,10 @@
     &__search{
         color: aliceblue;
         font-size: 20px;
+    }
+    &__link{
+        color:#e7bb7a;
+        cursor: pointer;
     }
 }
 .button41 {
