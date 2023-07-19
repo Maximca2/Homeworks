@@ -1,8 +1,7 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 
 import MainPage from './pages/MainPage';
-
-import { Container } from 'react-bootstrap';
 
 import './App.css';
 

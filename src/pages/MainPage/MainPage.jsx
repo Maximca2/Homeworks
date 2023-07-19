@@ -1,28 +1,20 @@
-import React from "react";
-import { useState } from "react";
-import { Routes, NavLink, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useContext } from "react";
+import { Button } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
 
 import Basket from "../Basket";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
+import ProductContext from "../../Context/Context-product";
 
 import style from "./MainPage.module.scss";
 
+
 const MainPage = () => {
-  
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.items.it);
-  const [show, setShow] = useState(true);
-  const curProducts = useSelector((state) => state.items.basket);
-  const ADD_TO_BASKET ='ADD_TO_BASKET'
-  
+  const { product } = useContext(ProductContext);
+  const { setShow } = useContext(ProductContext);
+  const { cartItems, setCartItems } = useContext(ProductContext);
+
   const addToCart = (product) => {
-    const currentProduct = {
-      product,
-      data: Date.now(),
-    };
-    dispatch({ type: ADD_TO_BASKET, payload: currentProduct });
+    setCartItems([...cartItems, product]);
   };
 
   function showBasket(cond) {
@@ -34,17 +26,13 @@ const MainPage = () => {
         <div className={style.box}>
           <header className={style.box__header}>
             <div className={style.box__ofheader}>
-              <div
-                className={style.box__nameofCompany}
-              >
-                Bags
-              </div>
+              <div className={style.box__nameofCompany}>Bags</div>
             </div>
           </header>
           <main>
             <div className={style.box__list}>
-            {products.map((it, i) => {
-                const {name,img,price} = it;
+              {product.map((it, i) => {
+                const { name, img, price } = it;
                 return (
                   <div key={i} className={style.box__card}>
                     <div className={style.box__img}>
@@ -67,19 +55,16 @@ const MainPage = () => {
             <nav>
               <div className={style.box__search}>Шукати</div>
               <div className={style.box__search}>Подобається</div>
+              className={style.box__search}
               <div
                 onClick={() => showBasket(false)}
-                className={style.box__search}
+                className={style.box__link}
               >
-                <NavLink className={style.box__link} to="/basket">
-                  Корзина {curProducts.length}
-                </NavLink>
+                Корзина
               </div>
             </nav>
           </div>
-          <Routes>
-            <Route path="/basket" element={<Basket showsBasket={show} />} />
-          </Routes>
+          <Basket products={cartItems} />
         </div>
       </Container>
     </div>
