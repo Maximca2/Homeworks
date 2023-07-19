@@ -22,9 +22,7 @@ const MainPage = () => {
   function showBasket(cond) {
     setShow(cond);
   }
-  function clearHistory() {
-    window.localStorage.clear();
-  }
+  
 
   return (
     <div>
@@ -34,7 +32,7 @@ const MainPage = () => {
             <div className={style.box__ofheader}>
               <div
                 className={style.box__nameofCompany}
-                onClick={() => clearHistory()}
+                
               >
                 Bags
               </div>
