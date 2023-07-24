@@ -1,23 +1,13 @@
 import {useDispatch,useSelector} from 'react-redux'
-import style from './Basket.module.scss'
 import Button from 'react-bootstrap/esm/Button';
-import { useEffect} from 'react';
+
+import style from './Basket.module.scss'
 
 const Basket = (props) => {
-
     const dispatch = useDispatch();
     const curProducts = useSelector(state=>state.items.basket)
     const REMOVE_FROM_BASKET = 'REMOVE_FROM_BASKET'
-
-    function isReady (curPr){
-        return curPr
-    }
-    useEffect(()=>{
-        isReady(curProducts)    
-
-    },[curProducts]);
     const showBaskety = props.showsBasket;
-    
     function deleteIt(id) {
         dispatch({type:REMOVE_FROM_BASKET,payload:id}) 
         

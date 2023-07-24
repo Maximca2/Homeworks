@@ -1,8 +1,9 @@
+import React from 'react';
+import { Container } from 'react-bootstrap';
+
+import MainPage from './pages/MainPage';
 
 import './App.css';
-import React from 'react';
-import MainPage from './pages/MainPage';
-import { Container } from 'react-bootstrap';
 function App() {
   return (
     <div className="App">

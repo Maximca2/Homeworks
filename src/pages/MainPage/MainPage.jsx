@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Basket from "../Basket";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+
+import Basket from "../Basket";
+
 import style from "./MainPage.module.scss";
 
 const MainPage = () => {
