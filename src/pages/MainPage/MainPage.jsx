@@ -1,19 +1,13 @@
 import React from "react";
-import { useState } from "react";
-import { Routes, NavLink, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
-import Basket from "../Basket";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
 import style from "./MainPage.module.scss";
 
 const MainPage = () => {
-  
   const dispatch = useDispatch();
   const products = useSelector((state) => state.items.it);
-  const [show, setShow] = useState(true);
   const curProducts = useSelector((state) => state.items.basket);
   const ADD_TO_BASKET ='ADD_TO_BASKET'
   
@@ -24,10 +18,6 @@ const MainPage = () => {
     };
     dispatch({ type: ADD_TO_BASKET, payload: currentProduct });
   };
-
-  function showBasket(cond) {
-    setShow(cond);
-  }
   return (
     <div>
       <Container>
@@ -68,22 +58,17 @@ const MainPage = () => {
               <div className={style.box__search}>Шукати</div>
               <div className={style.box__search}>Подобається</div>
               <div
-                onClick={() => showBasket(false)}
                 className={style.box__search}
               >
-                <NavLink className={style.box__link} to="/basket">
-                  Корзина {curProducts.length}
-                </NavLink>
+                <div className={style.baskettittle}>
+                Корзина {curProducts.length}
+                </div>
               </div>
             </nav>
           </div>
-          <Routes>
-            <Route path="/basket" element={<Basket showsBasket={show} />} />
-          </Routes>
         </div>
       </Container>
     </div>
   );
 };
-
 export default MainPage;
