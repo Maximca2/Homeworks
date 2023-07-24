@@ -1,16 +1,14 @@
 import React from 'react';
-
-import MainPage from './pages/MainPage';
-
 import { Container } from 'react-bootstrap';
 
-import './App.css';
+import MainRoute from './pages/MainRoutePage/MainRoute';
 
+import './App.css';
 function App() {
   return (
     <div className="App">
       <Container>
-        <MainPage />
+        <MainRoute/>
       </Container>
     </div>
   );
