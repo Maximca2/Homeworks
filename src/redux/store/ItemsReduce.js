@@ -36,9 +36,9 @@ const product = [
     },
 ]
 
-let defaultState = {
+const defaultState = {
     it: product,
-    basket: localStorage.getItem(LOCAL_STORAGE_KEY)?JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)):[],
+    basket: localStorage.getItem(LOCAL_STORAGE_KEY) ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) : [],
 
 }
 
@@ -46,12 +46,13 @@ export const itemsReducer = (state = defaultState, { payload, type }) => {
     switch (type) {
 
         case ADD_TO_BASKET:
-            localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(state.basket))
-            return   { ...state, basket: [...state.basket, payload] } 
+            const newBasket = [...state.basket, payload]
+            localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(newBasket))
+            return   { ...state, basket: newBasket } 
         case REMOVE_FROM_BASKET:
-
-            return { ...state, basket: state.basket.filter(it => it.product.id !== payload) }
-
+            const newBaskets = state.basket.filter(it => it.product.id !== payload)
+            localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(newBaskets))
+            return { ...state, basket: newBaskets }
 
         case DATA_NOT_CHANGED:
             return { ...state, basket: [...state.basket, payload] }
