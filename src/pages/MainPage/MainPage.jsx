@@ -7,14 +7,16 @@ import Basket from "../Basket";
 
 import style from "./MainPage.module.scss";
 import { fetchUsers } from "../../services/Servise";
+import Skeleton from "../../Ui/Skeleton";
 const imgPerson =
   "https://previews.123rf.com/images/fokaspokas/fokaspokas1806/fokaspokas180600645/103145234-team-few-person-white-icon-with-shadow-on-transparent-background.jpg";
+
 const MainPage = () => {
   const dispatch = useDispatch();
-  // const products = useSelector((state) => state.items.it);
   const users = useSelector((state) => state.items.users);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const usersss = users[0];
+
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(fetchUsers());
@@ -39,7 +41,9 @@ const MainPage = () => {
   function showBasket(cond) {
     setShow(cond);
   }
-
+  function createSkeleton(){
+    return <Skeleton/>
+  }
   return (
     <div>
       <Container>
@@ -58,9 +62,10 @@ const MainPage = () => {
             <div className={style.box__list}>
               {!usersss || showSkeleton ? (
                 <>
-                  {users.map((it) => {
-                    return <div className="">{it.name}</div>;
-                  })}
+                  {createSkeleton()}
+                  {createSkeleton()}
+                  {createSkeleton()}
+                  {createSkeleton()}
                   <div className="">грузе</div>
                 </>
               ) : (
