@@ -36,9 +36,9 @@ const product = [
     },
 ]
 
-let defaultState = {
+const defaultState = {
     it: product,
-    basket: localStorage.getItem(LOCAL_STORAGE_KEY)?JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)):[],
+    basket: localStorage.getItem(LOCAL_STORAGE_KEY) ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) : [],
 
 }
 

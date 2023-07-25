@@ -21,7 +21,7 @@
     flex-direction: column;
     height: 350px;
     background-color: bisque;
-    border-radius:6px;
+    border-radius: 6px;
   }
 }
 
@@ -41,7 +41,7 @@
 
   padding: 0 20px;
   pointer-events: auto;
-//   position: absolute;
+  //   position: absolute;
   text-align: center;
   touch-action: manipulation;
   user-select: none;
@@ -52,62 +52,61 @@
   z-index: 9;
   border: 0;
   margin-bottom: 30px;
-//   right: 70px;
+  //   right: 70px;
 
   &:hover {
     background: #00bd68;
   }
 }
 .button42 {
-    background-color: initial;
-    background-image: linear-gradient(-180deg, #1a2721, #bd2c00);
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
-    color: #ffffff;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial,
-      sans-serif;
-    height: 44px;
-    line-height: 44px;
-    outline: 0;
-    overflow: hidden;
-    padding: 0 20px;
-    pointer-events: auto;
+  background-color: initial;
+  background-image: linear-gradient(-180deg, #1a2721, #bd2c00);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  height: 44px;
+  line-height: 44px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  pointer-events: auto;
   //   position: absolute;
-    text-align: center;
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: top;
-    white-space: nowrap;
-    width: 165px;
-    z-index: 9;
-    border: 0;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: top;
+  white-space: nowrap;
+  width: 165px;
+  z-index: 9;
+  border: 0;
   //   right: 70px;
-  
-    &:hover {
-      background: #ffa277;
-    }
+
+  &:hover {
+    background: #ffa277;
   }
-
-.active{
-  transition: all 1s ease-out ;
-  transform: translate(0px,0px);
 }
 
-.notactive{
-  transition: all 1s ease-out ;
-  transform: translate(-5000px,0px);
+.active {
+  transition: all 1s ease-out;
+  transform: translate(0px, 0px);
 }
-img{
+
+.notactive {
+  transition: all 1s ease-out;
+  transform: translate(-5000px, 0px);
+}
+img {
   max-width: 165px;
   max-height: 165px;
 }
-.box{
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: coral;
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: coral;
 }
