@@ -29,7 +29,8 @@ const Basket = (props) => {
           {!curProducts.length
             ? "Корзина пуста"
             : curProducts.map((it, i) => {
-                const {name,img,price} = it.product;
+                const {name,img,price,id} = it.product;
+                
                 return (
                   <div key={i} className={style.basket__card}>
                     <div className="">
@@ -39,7 +40,7 @@ const Basket = (props) => {
                     <div className="">{price}</div>
                     <Button className={style.button41}>Купити</Button>
                     <Button
-                      onClick={() => deleteIt(i)}
+                      onClick={() => deleteIt(id)}
                       className={style.button42}
                     >
                       Видалити

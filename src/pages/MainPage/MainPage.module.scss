@@ -32,7 +32,9 @@
         border-radius: 10px;
     }
     &__list{
+        padding: 40px 30px;
         display: flex;
+        flex-wrap:wrap;
         gap: 40px;
         margin-bottom: 50px;
     }

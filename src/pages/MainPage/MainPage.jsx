@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -6,10 +6,25 @@ import Button from "react-bootstrap/Button";
 import Basket from "../Basket";
 
 import style from "./MainPage.module.scss";
-
+import { fetchUsers } from "../../services/Servise";
+const imgPerson =
+  "https://previews.123rf.com/images/fokaspokas/fokaspokas1806/fokaspokas180600645/103145234-team-few-person-white-icon-with-shadow-on-transparent-background.jpg";
 const MainPage = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.items.it);
+  // const products = useSelector((state) => state.items.it);
+  const users = useSelector((state) => state.items.users);
+  const [showSkeleton, setShowSkeleton] = useState(true);
+  const usersss = users[0];
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(fetchUsers());
+    }, 2000);
+    return () => {
+      clearTimeout(timer);
+      setShowSkeleton(false);
+    };
+  }, []);
+
   const [show, setShow] = useState(true);
   const curProducts = useSelector((state) => state.items.basket);
 
@@ -24,7 +39,6 @@ const MainPage = () => {
   function showBasket(cond) {
     setShow(cond);
   }
-  
 
   return (
     <div>
@@ -34,7 +48,7 @@ const MainPage = () => {
             <div className={style.box__ofheader}>
               <div
                 className={style.box__nameofCompany}
-                
+                onClick={() => dispatch(fetchUsers())}
               >
                 Bags
               </div>
@@ -42,24 +56,34 @@ const MainPage = () => {
           </header>
           <main>
             <div className={style.box__list}>
-              {products.map((it, i) => {
-                const {name,img,price} = it;
-                return (
-                  <div key={i} className={style.box__card}>
-                    <div className={style.box__img}>
-                      <img src={img} alt="img_bags" />
+              {!usersss || showSkeleton ? (
+                <>
+                  {users.map((it) => {
+                    return <div className="">{it.name}</div>;
+                  })}
+                  <div className="">грузе</div>
+                </>
+              ) : (
+                usersss.map((it, i) => {
+                  const { name, company } = it;
+
+                  return (
+                    <div key={i} className={style.box__card}>
+                      <div className={style.box__img}>
+                        <img src={imgPerson} alt="img_bags" />
+                      </div>
+                      <div className="">{name}</div>
+                      <div className=""> Company:{company.name}</div>
+                      <Button
+                        className={style.button41}
+                        onClick={() => addToCart(it)}
+                      >
+                        SHOP NOW!
+                      </Button>
                     </div>
-                    <div className="">{name}</div>
-                    <div className="">{price}</div>
-                    <Button
-                      className={style.button41}
-                      onClick={() => addToCart(it)}
-                    >
-                      SHOP NOW!
-                    </Button>
-                  </div>
-                );
-              })}
+                  );
+                })
+              )}
             </div>
           </main>
           <div className={style.box__navigation}>
@@ -76,6 +100,7 @@ const MainPage = () => {
             </nav>
           </div>
           <Basket showsBasket={show} />
+          <button className="">reeeeeeeeeeeeeeeeeeeee</button>
         </div>
       </Container>
     </div>
