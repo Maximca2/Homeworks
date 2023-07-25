@@ -66,7 +66,6 @@ const MainPage = () => {
                   {createSkeleton()}
                   {createSkeleton()}
                   {createSkeleton()}
-                  <div className="">грузе</div>
                 </>
               ) : (
                 usersss.map((it, i) => {
@@ -105,7 +104,6 @@ const MainPage = () => {
             </nav>
           </div>
           <Basket showsBasket={show} />
-          <button className="">reeeeeeeeeeeeeeeeeeeee</button>
         </div>
       </Container>
     </div>
