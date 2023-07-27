@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
-import style from "./MainPage.module.scss";
 
+import style from "./MainPage.module.scss";
 const MainPage = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.items.it);
