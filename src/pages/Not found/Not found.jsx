@@ -6,9 +6,7 @@ const pageNotFound =
 const NotFound = () => {
   return (
     <div>
-      <div className="">
         <img src={pageNotFound} alt="img not found" />
-      </div>
     </div>
   );
 };
