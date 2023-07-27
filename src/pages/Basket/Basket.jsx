@@ -20,22 +20,23 @@ const Basket = () => {
           <div className={style.basket__list}>
             {!curProducts.length
               ? "Корзина пуста"
-              : curProducts.map((it, i) => (
-                  <div key={i} className={style.basket__card}>
-                    <div className="">
-                      <img src={it.product.img} alt="curimg" />
+              : curProducts.map(({ product }, i) => {
+                  const { name, price, img } = product;
+                  return (
+                    <div key={i} className={style.basket__card}>
+                      <img src={img} alt="curimg" />
+                      {name}
+                      <div className="">{price}</div>
+                      <Button className={style.button41}>Купити</Button>
+                      <Button
+                        onClick={() => deleteIt(i)}
+                        className={style.button42}
+                      >
+                        Видалити
+                      </Button>
                     </div>
-                    {it.product.name}
-                    <div className="">{it.product.price}</div>
-                    <Button className={style.button41}>Купити</Button>
-                    <Button
-                      onClick={() => deleteIt(i)}
-                      className={style.button42}
-                    >
-                      Видалити
-                    </Button>
-                  </div>
-                ))}
+                  );
+                })}
           </div>
         </div>
       </div>
