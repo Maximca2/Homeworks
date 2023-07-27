@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
-
+import { ADD_TO_BASKET } from "../../redux/store/actions";
 import style from "./MainPage.module.scss";
+
 const MainPage = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.items.it);
   const curProducts = useSelector((state) => state.items.basket);
-  const ADD_TO_BASKET ='ADD_TO_BASKET'
+  
   
   const addToCart = (product) => {
     const currentProduct = {
