@@ -49,6 +49,7 @@ const MainPage = () => {
                       SHOP NOW!
                     </Button>
                   </div>
+                  
                 );
               })}
             </div>
