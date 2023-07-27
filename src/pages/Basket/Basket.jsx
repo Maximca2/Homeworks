@@ -26,7 +26,7 @@ const Basket = () => {
                     <div key={i} className={style.basket__card}>
                       <img src={img} alt="curimg" />
                       {name}
-                      <div className="">{price}</div>
+                      {price}
                       <Button className={style.button41}>Купити</Button>
                       <Button
                         onClick={() => deleteIt(i)}
