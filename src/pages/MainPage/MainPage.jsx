@@ -41,8 +41,8 @@ const MainPage = () => {
                     <div className={style.box__img}>
                       <img src={img} alt="img_bags" />
                     </div>
-                    <div className="">{name}</div>
-                    <div className="">{price}</div>
+                    {name}
+                    {price}
                     <Button
                       className={style.button41}
                       onClick={() => addToCart(it)}
