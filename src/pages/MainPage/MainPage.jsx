@@ -1,31 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
-import Basket from "../Basket";
-
+import { ADD_TO_BASKET } from "../../redux/store/actions";
 import style from "./MainPage.module.scss";
 
 const MainPage = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.items.it);
-  const [show, setShow] = useState(true);
   const curProducts = useSelector((state) => state.items.basket);
-
+  
+  
   const addToCart = (product) => {
     const currentProduct = {
       product,
       data: Date.now(),
     };
-    dispatch({ type: "ADD_TO_BASKET", payload: currentProduct });
+    dispatch({ type: ADD_TO_BASKET, payload: currentProduct });
   };
-
-  function showBasket(cond) {
-    setShow(cond);
-  }
-  
-
   return (
     <div>
       <Container>
@@ -34,7 +27,6 @@ const MainPage = () => {
             <div className={style.box__ofheader}>
               <div
                 className={style.box__nameofCompany}
-                
               >
                 Bags
               </div>
@@ -42,15 +34,15 @@ const MainPage = () => {
           </header>
           <main>
             <div className={style.box__list}>
-              {products.map((it, i) => {
+            {products.map((it, i) => {
                 const {name,img,price} = it;
                 return (
                   <div key={i} className={style.box__card}>
                     <div className={style.box__img}>
                       <img src={img} alt="img_bags" />
                     </div>
-                    <div className="">{name}</div>
-                    <div className="">{price}</div>
+                    {name}
+                    {price}
                     <Button
                       className={style.button41}
                       onClick={() => addToCart(it)}
@@ -58,6 +50,7 @@ const MainPage = () => {
                       SHOP NOW!
                     </Button>
                   </div>
+                  
                 );
               })}
             </div>
@@ -66,20 +59,18 @@ const MainPage = () => {
             <nav>
               <div className={style.box__search}>Шукати</div>
               <div className={style.box__search}>Подобається</div>
-              className={style.box__search}
               <div
-                onClick={() => showBasket(false)}
-                className={style.box__link}
+                className={style.box__search}
               >
+                <div className={style.baskettittle}>
                 Корзина {curProducts.length}
+                </div>
               </div>
             </nav>
           </div>
-          <Basket showsBasket={show} />
         </div>
       </Container>
     </div>
   );
 };
-
 export default MainPage;
