@@ -5,7 +5,7 @@ import { NavLink, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage/MainPage";
 import Basket from "./pages/Basket";
 import NotFound from "./pages/Not found/Not found";
-import { ROOT_TO_MAINPAGE,ROOT_TO_BASKET } from './routes'
+import { ROOT_TO_MAINPAGE,ROOT_TO_BASKET } from './routes/routes'
 
 import './App.css';
 
