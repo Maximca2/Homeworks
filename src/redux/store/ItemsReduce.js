@@ -56,7 +56,6 @@ export const itemsReducer = (state = defaultState, { payload, type }) => {
 
         case ADD_TO_BASKET:
             const newBasket = [...state.basket, payload]
-            console.log(newBasket)
             localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(newBasket))
             return   { ...state, basket: newBasket } 
         case REMOVE_FROM_BASKET:

@@ -41,8 +41,8 @@ const MainPage = () => {
   function showBasket(cond) {
     setShow(cond);
   }
-  function createSkeleton(){
-    return <Skeleton/>
+  function createSkeleton() {
+    return <Skeleton />;
   }
   return (
     <div>
@@ -109,5 +109,4 @@ const MainPage = () => {
     </div>
   );
 };
-
 export default MainPage;
