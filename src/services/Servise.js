@@ -1,7 +1,7 @@
-import { addCustomersAction } from "../redux/store/ItemsReduce"
+import { addCustomersAction } from "../redux/store/itemsReduce"
 
-export const fetchUsers =()=>{
-  return function(dispatch){
+export const fetchUsers = () => {
+  return function (dispatch) {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then(json => dispatch(addCustomersAction(json)))
