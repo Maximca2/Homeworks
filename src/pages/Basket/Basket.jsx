@@ -5,10 +5,9 @@ import { REMOVE_FROM_BASKET } from "../../redux/store/actions";
 
 import style from "./Basket.module.scss";
 
-const Basket = () => {
+const Basket = ({img}) => {
   const dispatch = useDispatch();
   const curProducts = useSelector((state) => state.items.basket);
-
   function deleteIt(id) {
     dispatch({ type: REMOVE_FROM_BASKET, payload: id });
   }
@@ -21,7 +20,7 @@ const Basket = () => {
             {!curProducts.length
               ? "Корзина пуста"
               : curProducts.map(({ product }, i) => {
-                  const { name, price, img } = product;
+                  const { name, price} = product;
                   return (
                     <div key={i} className={style.basket__card}>
                       <img src={img} alt="curimg" />
