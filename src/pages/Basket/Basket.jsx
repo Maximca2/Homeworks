@@ -13,7 +13,7 @@ const Basket = ({img}) => {
   }
   return (
     <div>
-      Корзина
+      List of adding workers
       <div className={style.box}>
         <div className={style.basket}>
           <div className={style.basket__list}>
