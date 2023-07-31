@@ -4,19 +4,20 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
 import Basket from "../Basket";
+import { fetchUsers } from "../../services/Servise";
+import SkeletonForMainpageCards from "../../components/Skeletons/SkeletonMainPageCards/SkeletonForMainpageCards";
 
 import style from "./MainPage.module.scss";
-import { fetchUsers } from "../../services/Servise";
-import Skeleton from "../../Ui/Skeleton";
+
 const imgPerson =
   "https://previews.123rf.com/images/fokaspokas/fokaspokas1806/fokaspokas180600645/103145234-team-few-person-white-icon-with-shadow-on-transparent-background.jpg";
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.items.users);
+  const users = useSelector((state) => state.items.users)[0];
   const [showSkeleton, setShowSkeleton] = useState(true);
-  const usersss = users[0];
-
+  const [show, setShow] = useState(true);
+  const curProducts = useSelector((state) => state.items.basket);
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(fetchUsers());
@@ -27,9 +28,6 @@ const MainPage = () => {
     };
   }, []);
 
-  const [show, setShow] = useState(true);
-  const curProducts = useSelector((state) => state.items.basket);
-
   const addToCart = (product) => {
     const currentProduct = {
       product,
@@ -37,12 +35,8 @@ const MainPage = () => {
     };
     dispatch({ type: "ADD_TO_BASKET", payload: currentProduct });
   };
-
   function showBasket(cond) {
     setShow(cond);
-  }
-  function createSkeleton() {
-    return <Skeleton />;
   }
   return (
     <div>
@@ -60,15 +54,12 @@ const MainPage = () => {
           </header>
           <main>
             <div className={style.box__list}>
-              {!usersss || showSkeleton ? (
+              {!users || showSkeleton ? (
                 <>
-                  {createSkeleton()}
-                  {createSkeleton()}
-                  {createSkeleton()}
-                  {createSkeleton()}
+                  <SkeletonForMainpageCards cardsLength={4} />
                 </>
               ) : (
-                usersss.map((it, i) => {
+                users.map((it, i) => {
                   const { name, company } = it;
 
                   return (
@@ -82,7 +73,7 @@ const MainPage = () => {
                         className={style.button41}
                         onClick={() => addToCart(it)}
                       >
-                        SHOP NOW!
+                        Add to Project
                       </Button>
                     </div>
                   );
@@ -99,14 +90,15 @@ const MainPage = () => {
                 onClick={() => showBasket(false)}
                 className={style.box__link}
               >
-                Корзина {curProducts.length}
+                List of workers on Project {curProducts.length}
               </div>
             </nav>
           </div>
-          <Basket showsBasket={show} />
+          <Basket showsBasket={show} img={imgPerson} />
         </div>
       </Container>
     </div>
   );
 };
+
 export default MainPage;
