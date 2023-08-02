@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
 import Basket from "../Basket";
-import { fetchUsers } from "../../services/Servise";
+import { fetchUsers } from "../../services/servise";
 import SkeletonForMainpageCards from "../../components/Skeletons/SkeletonMainPageCards/SkeletonForMainpageCards";
 
 import style from "./MainPage.module.scss";
