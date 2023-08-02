@@ -1,4 +1,4 @@
-import { addCustomersAction } from "../redux/store/itemsReduce"
+import { addCustomersAction } from "../redux/store/ItemsReduce"
 
 export const fetchUsers = () => {
   return function (dispatch) {
@@ -7,3 +7,4 @@ export const fetchUsers = () => {
       .then(json => dispatch(addCustomersAction(json)))
   }
 }
+
