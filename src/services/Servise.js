@@ -1,10 +1,19 @@
+import axios from 'axios';
+
 import { addCustomersAction } from "../redux/store/ItemsReduce"
 
 export const fetchUsers = () => {
+  
   return function (dispatch) {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(json => dispatch(addCustomersAction(json)))
+
+  axios.get(`${process.env.REACT_APP_API}/users`)
+
+  .then(({data})=>dispatch(addCustomersAction(data)))
+
+  .catch(function (error) {
+    console.error(error)
+  })
   }
+
 }
 
