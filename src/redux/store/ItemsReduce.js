@@ -1,8 +1,11 @@
 import imf from '../../img/bag_rose.jpg'
+
 const ADD_TO_BASKET = 'ADD_TO_BASKET'
 const REMOVE_FROM_BASKET = 'REMOVE_FROM_BASKET'
 const DATA_NOT_CHANGED = 'DATA_NOT_CHANGED'
 const LOCAL_STORAGE_KEY = 'OUR_STORAGE_ITEMS'
+const FETCH_DATA = 'FETCH_DATA'
+
 const product = [
     {
         name: 'Сумка',
@@ -37,6 +40,7 @@ const product = [
 ]
 
 const defaultState = {
+    users:[],
     it: product,
     basket: localStorage.getItem(LOCAL_STORAGE_KEY) ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) : [],
 
@@ -56,11 +60,14 @@ export const itemsReducer = (state = defaultState, { payload, type }) => {
 
         case DATA_NOT_CHANGED:
             return { ...state, basket: [...state.basket, payload] }
+        case FETCH_DATA:
+            const newUser = [...state.users,payload]
+            return { ...state, users: newUser }
 
         default:
             return state
     }
 }
 
-
+export const addCustomersAction = (payload)=>({type:FETCH_DATA,payload})
 
