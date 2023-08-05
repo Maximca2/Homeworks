@@ -4,8 +4,10 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
 import Basket from "../Basket";
-import { fetchUsers } from "../../services/servise";
 import SkeletonForMainpageCards from "../../components/Skeletons/SkeletonMainPageCards/SkeletonForMainpageCards";
+
+import { fetchUsers } from "../../services/servise";
+import { addUser } from "../../redux/store/usersReducer";
 
 import style from "./MainPage.module.scss";
 
@@ -13,11 +15,13 @@ const imgPerson =
   "https://previews.123rf.com/images/fokaspokas/fokaspokas1806/fokaspokas180600645/103145234-team-few-person-white-icon-with-shadow-on-transparent-background.jpg";
 
 const MainPage = () => {
+  
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.items.users)[0];
+  const users = useSelector((state) => state.toolkit.users)[0];
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [show, setShow] = useState(true);
-  const curProducts = useSelector((state) => state.items.basket);
+  const curProducts = useSelector((state) => state.toolkit.basket);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(fetchUsers());
@@ -33,8 +37,9 @@ const MainPage = () => {
       product,
       data: Date.now(),
     };
-    dispatch({ type: "ADD_TO_BASKET", payload: currentProduct });
+    dispatch(addUser(currentProduct));
   };
+
   function showBasket(cond) {
     setShow(cond);
   }
