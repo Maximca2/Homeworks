@@ -64,7 +64,6 @@ const AboutUser = () => {
       </div>
     </div>
   );
-  
 };
 
 export default AboutUser;
