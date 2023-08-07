@@ -1,11 +1,12 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+import { combineReducers,configureStore} from "@reduxjs/toolkit"
 
-import { itemsReducer } from './ItemsReduce';
+import {userReducer} from './usersReducer'
 
-const rootReducer = combineReducers({
-    items: itemsReducer,
+const RootReducer = combineReducers ({
+    toolkit:userReducer
 })
 
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+export const store = configureStore({
+    reducer:RootReducer,
+    
+})

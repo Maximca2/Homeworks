@@ -1,15 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/esm/Button";
 
-import { REMOVE_FROM_BASKET } from "../../redux/store/actions";
+import {removeUser} from '../../redux/store/usersReducer'
 
 import style from "./Basket.module.scss";
 
 const Basket = ({img}) => {
   const dispatch = useDispatch();
-  const curProducts = useSelector((state) => state.items.basket);
+  const curProducts = useSelector((state) => state.toolkit.basket);
+
   function deleteIt(id) {
-    dispatch({ type: REMOVE_FROM_BASKET, payload: id });
+    dispatch(removeUser(id));
   }
   return (
     <div>
@@ -20,7 +21,7 @@ const Basket = ({img}) => {
             {!curProducts.length
               ? "Корзина пуста"
               : curProducts.map(({ product }, i) => {
-                  const { name, price} = product;
+                  const { name, price,id} = product;
                   return (
                     <div key={i} className={style.basket__card}>
                       <img src={img} alt="curimg" />
@@ -28,7 +29,7 @@ const Basket = ({img}) => {
                       {price}
                       <Button className={style.button41}>Купити</Button>
                       <Button
-                        onClick={() => deleteIt(i)}
+                        onClick={() => deleteIt(id)}
                         className={style.button42}
                       >
                         Видалити

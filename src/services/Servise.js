@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-import { addCustomersAction } from "../redux/store/ItemsReduce"
+import { fetchUser } from '../redux/store/usersReducer'
 
 export const fetchUsers = () => {
-  
+
   return function (dispatch) {
 
-  axios.get(`${process.env.REACT_APP_API}/users`)
+    axios.get(`${process.env.REACT_APP_API}/users`)
+      .then(({ data }) =>
+        dispatch(fetchUser(data)))
 
-  .then(({data})=>dispatch(addCustomersAction(data)))
-
-  .catch(function (error) {
-    console.error(error)
-  })
+      .catch(function (error) {
+        console.error(error)
+      })
   }
 
 }
