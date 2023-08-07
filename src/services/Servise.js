@@ -24,7 +24,7 @@ export const fetchCurrentUserforId = (id) => {
 
     axios.get(`${process.env.REACT_APP_API}/users/${id}`)
       .then(({ data }) =>
-        dispatch(fetchUserId(data),console.log(data)))
+        dispatch(fetchUserId(data)))
 
       .catch(function (error) {
         console.error(error)
