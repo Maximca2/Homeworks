@@ -1,6 +1,6 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
-import { ADD_TO,REMOVE_FROM,FETCH_USERS } from './actions';
+import { ADD_TO,REMOVE_FROM_BASKET,FETCH_USERS } from './actions';
 
 import imf from '../../img/bag_rose.jpg'
 
@@ -46,7 +46,7 @@ const defaultState = {
 }
 // actions
 export const addUser = createAction(ADD_TO);
-export const removeUser =createAction(REMOVE_FROM);
+export const removeUser =createAction(REMOVE_FROM_BASKET);
 export const fetchUser = createAction(FETCH_USERS)
 
 //Reducer 
