@@ -21,7 +21,7 @@
         padding-top: 40px;
         padding-bottom: 10px;
         width: 250px;
-        height: 350px;
+        height: 450px;
         background-color: grey;
         display: flex;
         flex-direction: column;
@@ -29,6 +29,7 @@
         margin-bottom: 40px;
         align-items: center;
         border-radius: 10px;
+        margin-bottom: 150px;
     }
     &__list{
         padding: 40px 30px;
@@ -93,7 +94,7 @@
     width: 165px;
     z-index: 9;
     border: 0;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 
   
     &:hover {
@@ -108,4 +109,35 @@
     font-size: 24;
     text-align: right;
     color: #ffffff;
+}
+.button_LearnMore{
+    background-image: linear-gradient(-180deg, #00d7ac, #7ad8e7);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial,
+      sans-serif;
+    height: 44px;
+    line-height: 44px;
+    outline: 0;
+    padding: 0 20px;
+    pointer-events: auto;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: top;
+    white-space: nowrap;
+    width: 165px;
+    z-index: 9;
+    border: 0;
+    margin-bottom: 10px;
+    &:hover {
+      background: #31e278;
+    }
+    &__baskettittle{
+        font-size: 45px;
+    }
 }
