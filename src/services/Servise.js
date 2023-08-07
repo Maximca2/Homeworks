@@ -18,11 +18,11 @@ export const fetchUsers = () => {
 
 }
 //FetchUserForId
-export const fetchforId = (id) => {
+export const fetchCurrentUserforId = (id) => {
     
   return function (dispatch) {
 
-    axios.get(`${process.env.REACT_APP_API}/users/${id.userId}`)
+    axios.get(`${process.env.REACT_APP_API}/users/${id}`)
       .then(({ data }) =>
         dispatch(fetchUserId(data),console.log(data)))
 
