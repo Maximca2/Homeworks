@@ -1,0 +1,49 @@
+.about {
+  padding: 60px 30px;
+  width: 100%;
+  background-color: aquamarine;
+}
+.boxForImg {
+  display: flex;
+  padding: 30px 10px;
+  justify-content: left;
+  background-color: rgba(30, 239, 180, 0.562);
+  -webkit-box-shadow: inset 4px 0px 20px 20px rgba(0, 0, 0, 0.31);
+  -moz-box-shadow: inset 4px 0px 20px 20px rgba(0, 0, 0, 0.31);
+  box-shadow: inset 4px 0px 20px 20px rgba(0, 0, 0, 0.31);
+  gap: 20px;
+  img{
+    width: 30%;
+    padding-right: 50px;
+    border-radius: 5px;
+  }
+}
+
+.userInfoCompany{
+    padding: 20px 10px;
+    background-color: blueviolet;
+    text-align: center;
+    
+    .companyName{
+        font-size: 20px ;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+}
+.userInfoLive{
+    padding: 20px 10px;
+    background-color: rgb(223, 226, 43);
+    text-align: center;
+    .city{
+        font-size: 20px ;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+}
+.userInfoPerson{
+    padding: 20px 10px;
+    background-color: rgb(43, 226, 192);
+    text-align: center;
+    .name{
+        font-size: 20px ;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+}

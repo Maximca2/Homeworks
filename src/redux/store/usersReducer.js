@@ -1,6 +1,7 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
-import { ADD_TO,REMOVE_FROM_BASKET,FETCH_USERS } from './actions';
+
+import { ADD_TO,REMOVE_FROM_BASKET,FETCH_USERS,FETCH_USER_ID } from './actions';
 
 import imf from '../../img/bag_rose.jpg'
 
@@ -40,6 +41,7 @@ const product = [
 // DefaultState
 const defaultState = {
     users:[],
+    curentUser:[],
     it: product,
     basket: localStorage.getItem(LOCAL_STORAGE_KEY) ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) : [],
 
@@ -48,6 +50,7 @@ const defaultState = {
 export const addUser = createAction(ADD_TO);
 export const removeUser =createAction(REMOVE_FROM_BASKET);
 export const fetchUser = createAction(FETCH_USERS)
+export const fetchUserId = createAction(FETCH_USER_ID)
 
 //Reducer 
 export const userReducer = createReducer(defaultState, {
@@ -67,6 +70,14 @@ export const userReducer = createReducer(defaultState, {
         const newBaskets = state.basket.filter(it => it.product.id !== payload)
         state.basket=newBaskets
         localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(newBaskets))
+        
+    },
+    [fetchUserId]:function(state,{payload}){
+        const curUser = payload
+
+        state.curentUser=curUser;
+
+        
         
     },
 })

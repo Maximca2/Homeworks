@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-
-import Basket from "../Basket";
-import SkeletonForMainpageCards from "../../components/Skeletons/SkeletonMainPageCards/SkeletonForMainpageCards";
+import { NavLink } from "react-router-dom";
 
 import { fetchUsers } from "../../services/servise";
 import { addUser } from "../../redux/store/usersReducer";
+import { ROUTE_TO_ABOUT_USER } from "../../routes/routes";
+
+import SkeletonForMainpageCards from "../../components/Skeletons/SkeletonMainPageCards/SkeletonForMainpageCards";
+import Basket from "../Basket";
 
 import style from "./MainPage.module.scss";
 
@@ -15,7 +17,6 @@ const imgPerson =
   "https://previews.123rf.com/images/fokaspokas/fokaspokas1806/fokaspokas180600645/103145234-team-few-person-white-icon-with-shadow-on-transparent-background.jpg";
 
 const MainPage = () => {
-  
   const dispatch = useDispatch();
   const users = useSelector((state) => state.toolkit.users)[0];
   const [showSkeleton, setShowSkeleton] = useState(true);
@@ -65,7 +66,7 @@ const MainPage = () => {
                 </>
               ) : (
                 users.map((it, i) => {
-                  const { name, company } = it;
+                  const { name, company, id } = it;
 
                   return (
                     <div key={i} className={style.box__card}>
@@ -80,6 +81,15 @@ const MainPage = () => {
                       >
                         Add to Project
                       </Button>
+                      <NavLink
+                        to={`${ROUTE_TO_ABOUT_USER}${id}`}
+                        className={style.button_LearnMore}
+                        style={({ isActive }) => {
+                          return isActive ? { background: "#FFB4EA" } : {};
+                        }}
+                      >
+                        Learn more
+                      </NavLink>
                     </div>
                   );
                 })

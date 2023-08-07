@@ -1,0 +1,1 @@
+export const ROUTE_TO_ABOUT_USER = '/user/'
