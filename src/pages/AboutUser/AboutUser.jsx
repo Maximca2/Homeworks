@@ -69,7 +69,7 @@ const AboutUser = () => {
           </div>
         </div>
       </div>
-      <LeafletMap  cordinates={arrofCord.length===0 ? defaultCord : arrofCord} name={name}/>
+      <LeafletMap  cordinates={arrofCord.length ? defaultCord : arrofCord} name={name}/>
     </div>
   );
 };
