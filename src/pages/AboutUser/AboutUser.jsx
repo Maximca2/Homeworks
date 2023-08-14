@@ -28,7 +28,7 @@ const AboutUser = () => {
     setarrofCord(address?.geo ?? defaultCord)
     
   },[address])
-  console.log(arrofCord)
+  
   return (
     <div className={style.about}>
       <div className={style.box}>
