@@ -28,6 +28,7 @@ const AboutUser = () => {
     setarrofCord(address?.geo ?? defaultCord)
     
   },[address])
+  console.log(arrofCord)
   return (
     <div className={style.about}>
       <div className={style.box}>
@@ -69,7 +70,7 @@ const AboutUser = () => {
           </div>
         </div>
       </div>
-      <LeafletMap  cordinates={arrofCord.length ? defaultCord : arrofCord} name={name}/>
+      <LeafletMap  cordinates={arrofCord} name={name}/>
     </div>
   );
 };
