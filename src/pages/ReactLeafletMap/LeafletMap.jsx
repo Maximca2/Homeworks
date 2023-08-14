@@ -4,9 +4,8 @@ import "../ReactLeafletMap/leaflet.scss";
 import "leaflet/dist/leaflet.css";
 
 export default function LeafletMap({ cordinates }) {
-  if (!cordinates) {
-    return;
-  } else if (cordinates.lat && cordinates.lng) {
+
+  if (!cordinates||cordinates.lat) {
     return (
       <>
         <MapContainer center={cordinates} zoom={13}>
@@ -23,5 +22,5 @@ export default function LeafletMap({ cordinates }) {
       </>
     );
   }
-  
+   
 }
