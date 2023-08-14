@@ -5,7 +5,7 @@ import "leaflet/dist/leaflet.css";
 
 export default function LeafletMap({ cordinates }) {
 
-  if (!cordinates||cordinates.lat) {
+  if (cordinates.lat) {
     return (
       
         <MapContainer center={cordinates} zoom={13}>
@@ -22,5 +22,7 @@ export default function LeafletMap({ cordinates }) {
       
     );
   }
+    return
+
    
 }
