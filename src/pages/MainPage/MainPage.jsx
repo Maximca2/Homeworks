@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -23,7 +23,7 @@ const MainPage = () => {
   const [show, setShow] = useState(true);
 
   const curProducts = useSelector((state) => state.toolkit.basket);
-  console.log(curProducts);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(fetchUsers());
@@ -40,9 +40,8 @@ const MainPage = () => {
       data: Date.now(),
     };
     dispatch(addUser(currentProduct));
-    
   };
-  
+
   function showBasket(cond) {
     setShow(cond);
   }
@@ -68,7 +67,7 @@ const MainPage = () => {
                 </>
               ) : (
                 users.map((it, i) => {
-                  const { name, company, id, showOtherFunc } = it;
+                  const { name, company, id,} = it;
                   return (
                     <div key={i} className={style.box__card}>
                       <div className={style.box__img}>
@@ -76,18 +75,13 @@ const MainPage = () => {
                       </div>
                       <div className="">{name}</div>
                       <div className=""> Company:{company.name}</div>
-                      {!showOtherFunc ? (
-                        <Button
-                          className={style.button41}
-                          onClick={() => addToCart(it, i)}
-                        >
-                          Add to Project
-                        </Button>
-                      ) : (
-                        <Button className={style.button41}>
-                          remove from Project
-                        </Button>
-                      )}
+
+                      <Button
+                        className={style.button41}
+                        onClick={() => addToCart(it, i)}
+                      >
+                        Add to Project
+                      </Button>
 
                       <NavLink
                         to={`${ROUTE_TO_ABOUT_USER}${id}`}
