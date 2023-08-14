@@ -7,7 +7,7 @@ export default function LeafletMap({ cordinates }) {
 
   if (!cordinates||cordinates.lat) {
     return (
-      <>
+      
         <MapContainer center={cordinates} zoom={13}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -19,7 +19,7 @@ export default function LeafletMap({ cordinates }) {
             </Popup>
           </Marker>
         </MapContainer>
-      </>
+      
     );
   }
    
