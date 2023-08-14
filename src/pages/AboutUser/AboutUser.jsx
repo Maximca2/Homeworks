@@ -9,6 +9,8 @@ import LeafletMap from "../ReactLeafletMap/LeafletMap";
 
 import style from "./aboutUser.module.scss";
 
+const defaultCord = [51.505, -0.09]
+
 const imgUser =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ58xjpW6VV0nhZQpRKNjK0jCpjB1qgCmjGFw&usqp=CAU";
 
@@ -16,7 +18,7 @@ const AboutUser = () => {
   const [arrofCord,setarrofCord] = useState([])
   const dispatch = useDispatch();
   const { userId } = useParams();
-const defaultCord = [51.505, -0.09]
+
   const curUser = useSelector((state) => state.toolkit.curentUser);
   useEffect(() => {
     dispatch(fetchCurrentUserforId(userId));
@@ -67,7 +69,7 @@ const defaultCord = [51.505, -0.09]
           </div>
         </div>
       </div>
-      <LeafletMap  cordinates={arrofCord.length===0?defaultCord:arrofCord} name={name}/>
+      <LeafletMap  cordinates={arrofCord.length===0 ? defaultCord : arrofCord} name={name}/>
     </div>
   );
 };
