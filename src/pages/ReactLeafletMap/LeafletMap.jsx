@@ -5,7 +5,9 @@ import "leaflet/dist/leaflet.css";
 
 export default function LeafletMap({ cordinates ,name}) {
   
-  if (cordinates) {
+  if (!cordinates) {
+    return
+  }
   
     return (
       
@@ -25,6 +27,6 @@ export default function LeafletMap({ cordinates ,name}) {
         </MapContainer>
       
     );
-  }
-    return
+  
+    
 }

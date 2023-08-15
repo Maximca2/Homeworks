@@ -29,7 +29,7 @@ const AboutUser = () => {
   const { name, username, email, address, company, phone, website } = curUser;
   
   useEffect(()=>{
-    setarrofCord(address?.geo??defaultCord)
+    setarrofCord(address?.geo ?? defaultCord)
     
   },[address])
   
