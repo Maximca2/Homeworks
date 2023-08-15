@@ -21,10 +21,13 @@ const AboutUser = () => {
   const { userId } = useParams();
 
   const curUser = useSelector((state) => state.toolkit.curentUser);
+
   useEffect(() => {
     dispatch(fetchCurrentUserforId(userId));
   }, [dispatch]);
+
   const { name, username, email, address, company, phone, website } = curUser;
+  
   useEffect(()=>{
     setarrofCord(address?.geo??defaultCord)
     
