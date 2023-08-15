@@ -5,7 +5,7 @@ import "leaflet/dist/leaflet.css";
 
 export default function LeafletMap({ cordinates ,name}) {
   
-  if (cordinates.lat) {
+  if (cordinates) {
   
     return (
       
