@@ -32,7 +32,8 @@
         margin-bottom: 150px;
     }
     &__list{
-        padding: 40px 30px;
+        position: relative;
+        padding: 140px 30px;
         display: flex;
         flex-wrap:wrap;
         gap: 40px;
@@ -141,4 +142,9 @@
     &__baskettittle{
         font-size: 45px;
     }
+}
+.input__box{
+    background-color: #e25731;
+    position: absolute;
+    top: 50px;
 }
