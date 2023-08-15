@@ -9,13 +9,14 @@ import LeafletMap from "../ReactLeafletMap/LeafletMap";
 
 import style from "./aboutUser.module.scss";
 
-const defaultCord = [51.505, -0.09]
+const defaultCord = {lat :51.505,lng:-0.09}
 
 const imgUser =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ58xjpW6VV0nhZQpRKNjK0jCpjB1qgCmjGFw&usqp=CAU";
 
 const AboutUser = () => {
-  const [arrofCord,setarrofCord] = useState([])
+  const [arrofCord,setarrofCord] = useState(defaultCord)
+
   const dispatch = useDispatch();
   const { userId } = useParams();
 
@@ -25,7 +26,7 @@ const AboutUser = () => {
   }, [dispatch]);
   const { name, username, email, address, company, phone, website } = curUser;
   useEffect(()=>{
-    setarrofCord(address?.geo ?? defaultCord)
+    setarrofCord(address?.geo??defaultCord)
     
   },[address])
   
