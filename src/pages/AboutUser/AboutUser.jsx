@@ -1,26 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import { fetchCurrentUserforId } from "../../services/servise";
 
+import LeafletMap from "../ReactLeafletMap/LeafletMap";
+
 import style from "./aboutUser.module.scss";
+
+const defaultCord = {lat :51.505,lng:-0.09}
 
 const imgUser =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ58xjpW6VV0nhZQpRKNjK0jCpjB1qgCmjGFw&usqp=CAU";
 
 const AboutUser = () => {
+  const [arrofCord,setarrofCord] = useState(defaultCord)
+
   const dispatch = useDispatch();
   const { userId } = useParams();
 
   const curUser = useSelector((state) => state.toolkit.curentUser);
 
-  const { name, username, email, address, company, phone, website } = curUser;
-
   useEffect(() => {
     dispatch(fetchCurrentUserforId(userId));
-  }, []);
+  }, [dispatch]);
+
+  const { name, username, email, address, company, phone, website } = curUser;
+  
+  useEffect(()=>{
+    setarrofCord(address?.geo??defaultCord)
+    
+  },[address])
+  
   return (
     <div className={style.about}>
       <div className={style.box}>
@@ -62,6 +74,7 @@ const AboutUser = () => {
           </div>
         </div>
       </div>
+      <LeafletMap  cordinates={arrofCord} name={name}/>
     </div>
   );
 };
