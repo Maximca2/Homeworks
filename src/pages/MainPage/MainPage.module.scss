@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     &__header{
+        position: relative;
         padding-top: 80px;
         display: flex;
         justify-content: center;
@@ -32,7 +33,7 @@
         margin-bottom: 150px;
     }
     &__list{
-        position: relative;
+        
         padding: 140px 30px;
         display: flex;
         flex-wrap:wrap;
@@ -146,5 +147,5 @@
 .input__box{
     background-color: #e25731;
     position: absolute;
-    top: 50px;
+    top: 390px;
 }
