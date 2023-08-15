@@ -21,7 +21,6 @@ const MainPage = () => {
   const users = useSelector((state) => state.toolkit.users)[0];
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [show, setShow] = useState(true);
-
   const curProducts = useSelector((state) => state.toolkit.basket);
 
   useEffect(() => {
@@ -32,9 +31,9 @@ const MainPage = () => {
       clearTimeout(timer);
       setShowSkeleton(false);
     };
-  }, [dispatch]);
+  }, []);
 
-  const addToCart = (product, i) => {
+  const addToCart = (product) => {
     const currentProduct = {
       product,
       data: Date.now(),
@@ -67,7 +66,8 @@ const MainPage = () => {
                 </>
               ) : (
                 users.map((it, i) => {
-                  const { name, company, id,} = it;
+                  const { name, company, id } = it;
+
                   return (
                     <div key={i} className={style.box__card}>
                       <div className={style.box__img}>
@@ -75,14 +75,12 @@ const MainPage = () => {
                       </div>
                       <div className="">{name}</div>
                       <div className=""> Company:{company.name}</div>
-
                       <Button
                         className={style.button41}
-                        onClick={() => addToCart(it, i)}
+                        onClick={() => addToCart(it)}
                       >
                         Add to Project
                       </Button>
-
                       <NavLink
                         to={`${ROUTE_TO_ABOUT_USER}${id}`}
                         className={style.button_LearnMore}

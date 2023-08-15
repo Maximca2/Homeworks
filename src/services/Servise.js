@@ -9,7 +9,6 @@ export const fetchUsers = () => {
 
     axios.get(`${process.env.REACT_APP_API}/users`)
       .then(({ data }) =>
-      
         dispatch(fetchUser(data)))
 
       .catch(function (error) {
