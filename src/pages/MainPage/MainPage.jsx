@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import { NavLink } from "react-router-dom";
 
 import { fetchUsers } from "../../services/servise";
-import { addUser} from "../../redux/store/usersReducer";
+import { addUser,addUserandRemove} from "../../redux/store/usersReducer";
 import { ROUTE_TO_ABOUT_USER } from "../../routes/routes";
 
 import SkeletonForMainpageCards from "../../components/Skeletons/SkeletonMainPageCards/SkeletonForMainpageCards";
@@ -19,15 +19,18 @@ const imgPerson =
 const MainPage = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.toolkit.users)[0];
+  const curProducts = useSelector((state) => state.toolkit.basket);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [show, setShow] = useState(true);
   const [inputValue, setInputValue] = useState("");
   const [additionStatetoUsers, setadditionStatetoUsers] = useState(users);
-  const curProducts = useSelector((state) => state.toolkit.basket);
+  
+  console.log(additionStatetoUsers)
   useEffect(()=>{
     if(!inputValue){
       setadditionStatetoUsers(users)
     }
+
   },[inputValue])
   useEffect(()=>{
     if(users){
@@ -45,11 +48,21 @@ const MainPage = () => {
     };
   }, [dispatch]);
   const addToCart = (product, i) => {
+
+    // const products = [...additionStatetoUsers];
+    //  products[i].changeText = false?products[i].changeText = true:products[i].changeText = false
+
+
+    //  console.log(products[i].changeText = true)
+    
     const currentProduct = {
       product,
+      i,
       data: Date.now(),
     };
+    dispatch(addUserandRemove(currentProduct))
     dispatch(addUser(currentProduct));
+    
   };
 
   function showBasket(cond) {
@@ -103,7 +116,8 @@ const MainPage = () => {
                   <SkeletonForMainpageCards cardsLength={4} />
                 </>
               ) : (additionStatetoUsers.map((it, i) => {
-                  const { name, company, id } = it;
+                  const { name, company, id ,changeText} = it;
+                  
                   return (
                     <div key={i}  className={style.box__card}>
                       <div className={style.box__img}>
@@ -114,9 +128,9 @@ const MainPage = () => {
 
                       <Button
                         className={style.button41}
-                        onClick={() => addToCart(it, i)}
+                        onClick={!changeText?() => addToCart(it,i):console.log(it)}
                       >
-                        Add to Project
+                        {!changeText?'Add to Project':'Remove from project'} 
                       </Button>
 
                       <NavLink
