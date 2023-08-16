@@ -19,11 +19,12 @@ const imgPerson =
 const MainPage = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.toolkit.users)[0];
-  const curProducts = useSelector((state) => state.toolkit.basket);
+  const favorites = useSelector((state) => state.toolkit.basket);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [show, setShow] = useState(true);
   const [inputValue, setInputValue] = useState("");
   const [additionStatetoUsers, setadditionStatetoUsers] = useState(users);
+  
   
   console.log(additionStatetoUsers)
   useEffect(()=>{
@@ -117,6 +118,10 @@ const MainPage = () => {
                 </>
               ) : (additionStatetoUsers.map((it, i) => {
                   const { name, company, id ,changeText} = it;
+                  const isFavorite = favorites.find(({product}) => product.id === id)
+                  
+
+                  console.log({it, favorites});
                   
                   return (
                     <div key={i}  className={style.box__card}>
@@ -130,7 +135,7 @@ const MainPage = () => {
                         className={style.button41}
                         onClick={!changeText?() => addToCart(it,i):console.log(it)}
                       >
-                        {!changeText?'Add to Project':'Remove from project'} 
+                        {isFavorite?'Remove from project':'Add to Project'} 
                       </Button>
 
                       <NavLink
@@ -157,7 +162,7 @@ const MainPage = () => {
                 onClick={() => showBasket(false)}
                 className={style.box__link}
               >
-                List of workers on Project {curProducts.length}
+                List of workers on Project {favorites.length}
               </div>
             </nav>
           </div>
