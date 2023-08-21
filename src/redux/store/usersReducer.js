@@ -63,50 +63,37 @@ export const userReducer = createReducer(defaultState, {
 
     },
     [addUserandRemove]: function (state, { payload }) {
-
-
-        // const it1 = payload.product;
-        // it1.changeText = true
-        // let it1 = Object.assign({}, payload.product);
-        // // console.log(it1)
-        // it1.changeText = true
-        console.log(payload.product)
-        const newUser = state.users.filter(it => it!==payload.product);
-
-        console.log(newUser)
-
-
-
-        state.users = newUser
-        // console.log(newUser)
-
-
-
-
-        // console.log(it1)
-        // state.users.push(it1)
-
-        // state.users.push(newObj)
-
-        // console.log(payload.product)
-        // state.users.push(payload)
-
-        // console.log(payload.filter(it=>it))
-        // state.users.push(payload)
-        //     payload.changeText = true
-        //     const newUser = [...state.basket,payload]
-
-        //     state.basket.push(payload)
-        //    localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(newUser))
+        const newBaskets = state.basket.filter(it => it.product.id !== payload)
+        state.basket = newBaskets
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newBaskets))
 
     },
 
     [addUser]: function (state, { payload }) {
         // payload.product.changeText = true
         // state.basket.push(payload)
+        // const arr = []
+        // const userExist = [];
+        // console.log(payload.product)
         const newUser = [...state.basket, payload]
+        // userExist.push(payload.product);
+        // console.log(userExist)
 
+        // userExist.forEach(it=>{
+            
+        //     if(!arr.includes(it)){
+        //         arr.push(it)
+        //     }
+
+        // })
+        // console.log(arr)
+        // state.basket.push(arr)
         state.basket.push(payload)
+
+        // const ourBasket = state.basket;
+        // ourBasket.forEach(it=>{
+        //     if()
+        // })
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newUser))
 
     },
