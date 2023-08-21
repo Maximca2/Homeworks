@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import { NavLink } from "react-router-dom";
 
 import { fetchUsers } from "../../services/servise";
-import { addUser,addUserandRemove} from "../../redux/store/usersReducer";
+import { addUser, removeFromFavorites } from "../../redux/store/usersReducer";
 import { ROUTE_TO_ABOUT_USER } from "../../routes/routes";
 
 import SkeletonForMainpageCards from "../../components/Skeletons/SkeletonMainPageCards/SkeletonForMainpageCards";
@@ -25,22 +25,20 @@ const MainPage = () => {
   const [inputValue, setInputValue] = useState("");
   const [additionStatetoUsers, setadditionStatetoUsers] = useState(users);
 
-  useEffect(()=>{
-    if(!inputValue){
-      setadditionStatetoUsers(users)
+  useEffect(() => {
+    if (!inputValue) {
+      setadditionStatetoUsers(users);
     }
+  }, [inputValue]);
 
-  },[inputValue])
-
-  useEffect(()=>{
-    if(users){
-      setadditionStatetoUsers(users)
+  useEffect(() => {
+    if (users) {
+      setadditionStatetoUsers(users);
     }
-  },[users])
+  }, [users]);
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(fetchUsers());
-      
     }, 2000);
     return () => {
       clearTimeout(timer);
@@ -48,22 +46,16 @@ const MainPage = () => {
     };
   }, [dispatch]);
   const addToCart = (product, i) => {
-
     const currentProduct = {
       product,
     };
 
     dispatch(addUser(currentProduct));
-    
   };
 
-  const removeFromFavorites = (id)=>{
-
-    dispatch(addUserandRemove(id))
-
-  }
-
-
+  const removeFromFavoritess = (id) => {
+    dispatch(removeFromFavorites(id));
+  };
 
   function showBasket(cond) {
     setShow(cond);
@@ -85,7 +77,6 @@ const MainPage = () => {
         }
         setadditionStatetoUsers(ourArrforfilterUser);
       }
-      
     }
   };
   return (
@@ -110,32 +101,34 @@ const MainPage = () => {
                   <input type="text" value={inputValue} onChange={FilterData} />
                 </label>
                 <p>Input Value: {inputValue}</p>
-              </div> 
+              </div>
               {!additionStatetoUsers || showSkeleton ? (
                 <>
                   <SkeletonForMainpageCards cardsLength={4} />
                 </>
-              ) : (additionStatetoUsers.map((it, i) => {
+              ) : (
+                additionStatetoUsers.map((it, i) => {
                   const { name, company, id } = it;
-                  const isFavorite = favorites.find(({product}) => product.name === it.name)
-                  
-
-                  // console.log({it, favorites});
-                  
+                  const isFavorite = favorites.find(
+                    ({ product }) => product.name === it.name
+                  );
                   return (
-                    <div key={i}  className={style.box__card}>
+                    <div key={i} className={style.box__card}>
                       <div className={style.box__img}>
                         <img src={imgPerson} alt="img_bags" />
                       </div>
-                      <div >{name}</div>
-                      <div > Company:{company.name}</div>
+                      <div>{name}</div>
+                      <div> Company:{company.name}</div>
 
                       <Button
                         className={style.button41}
-                        
-                        onClick={!isFavorite?() => addToCart(it,i):()=>removeFromFavorites(id)}
+                        onClick={
+                          !isFavorite
+                            ? () => addToCart(it, i)
+                            : () => removeFromFavoritess(id)
+                        }
                       >
-                        {isFavorite?'Remove from project' :'Add to project'} 
+                        {isFavorite ? "Remove from project" : "Add to project"}
                       </Button>
 
                       <NavLink
