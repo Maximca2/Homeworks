@@ -24,15 +24,14 @@ const MainPage = () => {
   const [show, setShow] = useState(true);
   const [inputValue, setInputValue] = useState("");
   const [additionStatetoUsers, setadditionStatetoUsers] = useState(users);
-  
-  
-  console.log(additionStatetoUsers)
+
   useEffect(()=>{
     if(!inputValue){
       setadditionStatetoUsers(users)
     }
 
   },[inputValue])
+
   useEffect(()=>{
     if(users){
       setadditionStatetoUsers(users)
@@ -50,21 +49,21 @@ const MainPage = () => {
   }, [dispatch]);
   const addToCart = (product, i) => {
 
-    // const products = [...additionStatetoUsers];
-    //  products[i].changeText = false?products[i].changeText = true:products[i].changeText = false
-
-
-    //  console.log(products[i].changeText = true)
-    
     const currentProduct = {
       product,
-      i,
-      data: Date.now(),
     };
-    dispatch(addUserandRemove(currentProduct))
+
     dispatch(addUser(currentProduct));
     
   };
+
+  const removeFromFavorites = (id)=>{
+
+    dispatch(addUserandRemove(id))
+
+  }
+
+
 
   function showBasket(cond) {
     setShow(cond);
@@ -117,11 +116,11 @@ const MainPage = () => {
                   <SkeletonForMainpageCards cardsLength={4} />
                 </>
               ) : (additionStatetoUsers.map((it, i) => {
-                  const { name, company, id ,changeText} = it;
-                  const isFavorite = favorites.find(({product}) => product.id === id)
+                  const { name, company, id } = it;
+                  const isFavorite = favorites.find(({product}) => product.name === it.name)
                   
 
-                  console.log({it, favorites});
+                  // console.log({it, favorites});
                   
                   return (
                     <div key={i}  className={style.box__card}>
@@ -133,9 +132,10 @@ const MainPage = () => {
 
                       <Button
                         className={style.button41}
-                        onClick={!changeText?() => addToCart(it,i):console.log(it)}
+                        
+                        onClick={!isFavorite?() => addToCart(it,i):()=>removeFromFavorites(id)}
                       >
-                        {isFavorite?'Remove from project':'Add to Project'} 
+                        {isFavorite?'Remove from project' :'Add to project'} 
                       </Button>
 
                       <NavLink
