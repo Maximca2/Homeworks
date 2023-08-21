@@ -1,7 +1,7 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 
-import { ADD_TO, REMOVE_FROM_BASKET, FETCH_USERS, FETCH_USER_ID, ADD_AND_REMOVE_USER } from './actions';
+import { ADD_TO, REMOVE_FROM_BASKET, FETCH_USERS, FETCH_USER_ID, REMOVE_FROM_FAVORITES_USER } from './actions';
 
 import imf from '../../img/bag_rose.jpg'
 
@@ -51,7 +51,7 @@ export const addUser = createAction(ADD_TO);
 export const removeUser = createAction(REMOVE_FROM_BASKET);
 export const fetchUser = createAction(FETCH_USERS)
 export const fetchUserId = createAction(FETCH_USER_ID)
-export const addUserandRemove = createAction(ADD_AND_REMOVE_USER)
+export const removeFromFavorites = createAction(REMOVE_FROM_FAVORITES_USER)
 //Reducer 
 export const userReducer = createReducer(defaultState, {
 
@@ -62,7 +62,7 @@ export const userReducer = createReducer(defaultState, {
         state.users.push(payload)
 
     },
-    [addUserandRemove]: function (state, { payload }) {
+    [removeFromFavorites]: function (state, { payload }) {
         const newBaskets = state.basket.filter(it => it.product.id !== payload)
         state.basket = newBaskets
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newBaskets))
@@ -70,30 +70,9 @@ export const userReducer = createReducer(defaultState, {
     },
 
     [addUser]: function (state, { payload }) {
-        // payload.product.changeText = true
-        // state.basket.push(payload)
-        // const arr = []
-        // const userExist = [];
-        // console.log(payload.product)
+        
         const newUser = [...state.basket, payload]
-        // userExist.push(payload.product);
-        // console.log(userExist)
-
-        // userExist.forEach(it=>{
-            
-        //     if(!arr.includes(it)){
-        //         arr.push(it)
-        //     }
-
-        // })
-        // console.log(arr)
-        // state.basket.push(arr)
         state.basket.push(payload)
-
-        // const ourBasket = state.basket;
-        // ourBasket.forEach(it=>{
-        //     if()
-        // })
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newUser))
 
     },
