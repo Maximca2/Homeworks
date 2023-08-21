@@ -8,17 +8,19 @@ import style from "./Basket.module.scss";
 const Basket = ({img}) => {
   const dispatch = useDispatch();
   const curProducts = useSelector((state) => state.toolkit.basket);
-  console.log(curProducts)
+  
   function deleteIt(id) {
     dispatch(removeUser(id));
   }
+
   return (
+
     <div>
       List of adding workers
       <div className={style.box}>
         <div className={style.basket}>
           <div className={style.basket__list}>
-            {!curProducts.length
+            {! curProducts.length
               ? "Корзина пуста"
               : curProducts.map(({ product }, i) => {
                   const { name, price,id} = product;
@@ -42,6 +44,7 @@ const Basket = ({img}) => {
       </div>
     </div>
   );
+
 };
 
 export default Basket;
