@@ -20,7 +20,7 @@ const Basket = ({img}) => {
       <div className={style.box}>
         <div className={style.basket}>
           <div className={style.basket__list}>
-            {! curProducts.length
+            {!curProducts.length
               ? "Корзина пуста"
               : curProducts.map(({ product }, i) => {
                   const { name, price,id} = product;
