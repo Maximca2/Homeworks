@@ -23,19 +23,7 @@ const MainPage = () => {
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [show, setShow] = useState(true);
   const [inputValue, setInputValue] = useState("");
-  const [additionStatetoUsers, setadditionStatetoUsers] = useState(users);
 
-  useEffect(() => {
-    if (!inputValue) {
-      setadditionStatetoUsers(users);
-    }
-  }, [inputValue]);
-
-  useEffect(() => {
-    if (users) {
-      setadditionStatetoUsers(users);
-    }
-  }, [users]);
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(fetchUsers());
@@ -45,6 +33,7 @@ const MainPage = () => {
       setShowSkeleton(false);
     };
   }, [dispatch]);
+
   const addToCart = (product, i) => {
     const currentProduct = {
       product,
@@ -60,25 +49,12 @@ const MainPage = () => {
   function showBasket(cond) {
     setShow(cond);
   }
-  const FilterData = (event) => {
+  const setInp = (event) => {
     const str = event.target.value;
-    const ourArrforfilterUser = [];
+
     setInputValue(str);
-
-    if (users) {
-      for (let index = 0; index < users.length; index++) {
-        const userObj = users[index];
-        const address = Object.values(userObj.address);
-        const company = Object.values(userObj.company);
-        const allValue = Object.values(userObj).concat(company).concat(address);
-
-        if (allValue.includes(str)) {
-          ourArrforfilterUser.push(userObj);
-        }
-        setadditionStatetoUsers(ourArrforfilterUser);
-      }
-    }
   };
+
   return (
     <div>
       <Container>
@@ -98,51 +74,67 @@ const MainPage = () => {
               <div className={style.input__box}>
                 <label>
                   Input Value:
-                  <input type="text" value={inputValue} onChange={FilterData} />
+                  <input type="text" value={inputValue} onChange={setInp} />
                 </label>
                 <p>Input Value: {inputValue}</p>
               </div>
-              {!additionStatetoUsers || showSkeleton ? (
+              {!users || showSkeleton ? (
                 <>
                   <SkeletonForMainpageCards cardsLength={4} />
                 </>
               ) : (
-                additionStatetoUsers.map((it, i) => {
-                  const { name, company, id } = it;
-                  const isFavorite = favorites.find(
-                    ({ product }) => product.name === it.name
-                  );
-                  return (
-                    <div key={i} className={style.box__card}>
-                      <div className={style.box__img}>
-                        <img src={imgPerson} alt="img_bags" />
+                users
+                  .filter((it) => {
+                    const address = Object.values(it.address);
+                    const company = Object.values(it.company);
+                    const allValue = Object.values(it)
+                      .concat(address)
+                      .concat(company);
+                    if (allValue.includes(inputValue)) {
+                      return it;
+                    }
+                    if (!inputValue) {
+                      return it;
+                    } 
+                  })
+                  .map((it, i) => {
+                    const { name, company, id } = it;
+                    const isFavorite = favorites.find(
+                      ({ product }) => product.name === it.name
+                    );
+                    return (
+                      <div key={i} className={style.box__card}>
+                        <div className={style.box__img}>
+                          <img src={imgPerson} alt="img_bags" />
+                        </div>
+                        <div>{name}</div>
+                        <div> Company:{company.name}</div>
+
+                        <Button
+                          className={style.button41}
+                          onClick={
+                            !isFavorite
+                              ? () => addToCart(it, i)
+                              : () => removeFromFavoritess(id)
+                          }
+                        >
+                          {isFavorite
+                            ? "Remove from project"
+                            : "Add to project"}
+                        </Button>
+
+                        <NavLink
+                          to={`${ROUTE_TO_ABOUT_USER}${id}`}
+                          className={style.button_LearnMore}
+                          style={({ isActive }) => {
+                            return isActive ? { background: "#FFB4EA" } : {};
+                          }}
+                        >
+                          Learn more
+                        </NavLink>
                       </div>
-                      <div>{name}</div>
-                      <div> Company:{company.name}</div>
-
-                      <Button
-                        className={style.button41}
-                        onClick={
-                          !isFavorite
-                            ? () => addToCart(it, i)
-                            : () => removeFromFavoritess(id)
-                        }
-                      >
-                        {isFavorite ? "Remove from project" : "Add to project"}
-                      </Button>
-
-                      <NavLink
-                        to={`${ROUTE_TO_ABOUT_USER}${id}`}
-                        className={style.button_LearnMore}
-                        style={({ isActive }) => {
-                          return isActive ? { background: "#FFB4EA" } : {};
-                        }}
-                      >
-                        Learn more
-                      </NavLink>
-                    </div>
-                  );
-                })
+                    );
+                  })
               )}
             </div>
           </main>
