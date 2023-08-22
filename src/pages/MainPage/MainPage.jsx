@@ -55,6 +55,22 @@ const MainPage = () => {
     setInputValue(str);
   };
 
+  function filteredUser(arr, str) {
+    const arrOfCurUser = [];
+    if (!inputValue) {
+      return arr;
+    }
+
+    arr.filter((it) => {
+      const address = Object.values(it.address);
+      const company = Object.values(it.company);
+      const allValue = Object.values(it).concat(address).concat(company);
+      if (allValue.includes(str)) {
+        arrOfCurUser.push(it);
+      }
+    });
+    return arrOfCurUser;
+  }
   return (
     <div>
       <Container>
@@ -83,58 +99,42 @@ const MainPage = () => {
                   <SkeletonForMainpageCards cardsLength={4} />
                 </>
               ) : (
-                users
-                  .filter((it) => {
-                    const address = Object.values(it.address);
-                    const company = Object.values(it.company);
-                    const allValue = Object.values(it)
-                      .concat(address)
-                      .concat(company);
-                    if (allValue.includes(inputValue)) {
-                      return it;
-                    }
-                    if (!inputValue) {
-                      return it;
-                    } 
-                  })
-                  .map((it, i) => {
-                    const { name, company, id } = it;
-                    const isFavorite = favorites.find(
-                      ({ product }) => product.name === it.name
-                    );
-                    return (
-                      <div key={i} className={style.box__card}>
-                        <div className={style.box__img}>
-                          <img src={imgPerson} alt="img_bags" />
-                        </div>
-                        <div>{name}</div>
-                        <div> Company:{company.name}</div>
-
-                        <Button
-                          className={style.button41}
-                          onClick={
-                            !isFavorite
-                              ? () => addToCart(it, i)
-                              : () => removeFromFavoritess(id)
-                          }
-                        >
-                          {isFavorite
-                            ? "Remove from project"
-                            : "Add to project"}
-                        </Button>
-
-                        <NavLink
-                          to={`${ROUTE_TO_ABOUT_USER}${id}`}
-                          className={style.button_LearnMore}
-                          style={({ isActive }) => {
-                            return isActive ? { background: "#FFB4EA" } : {};
-                          }}
-                        >
-                          Learn more
-                        </NavLink>
+                filteredUser(users, inputValue).map((it, i) => {
+                  const { name, company, id } = it;
+                  const isFavorite = favorites.find(
+                    ({ product }) => product.name === it.name
+                  );
+                  return (
+                    <div key={i} className={style.box__card}>
+                      <div className={style.box__img}>
+                        <img src={imgPerson} alt="img_bags" />
                       </div>
-                    );
-                  })
+                      <div>{name}</div>
+                      <div> Company:{company.name}</div>
+
+                      <Button
+                        className={style.button41}
+                        onClick={
+                          !isFavorite
+                            ? () => addToCart(it, i)
+                            : () => removeFromFavoritess(id)
+                        }
+                      >
+                        {isFavorite ? "Remove from project" : "Add to project"}
+                      </Button>
+
+                      <NavLink
+                        to={`${ROUTE_TO_ABOUT_USER}${id}`}
+                        className={style.button_LearnMore}
+                        style={({ isActive }) => {
+                          return isActive ? { background: "#FFB4EA" } : {};
+                        }}
+                      >
+                        Learn more
+                      </NavLink>
+                    </div>
+                  );
+                })
               )}
             </div>
           </main>
