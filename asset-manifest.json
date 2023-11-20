@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Homeworks/static/css/main.f7e03f94.css",
-    "main.js": "/Homeworks/static/js/main.cb18133c.js",
+    "main.js": "/Homeworks/static/js/main.d832d84c.js",
     "static/media/bag_rose.jpg": "/Homeworks/static/media/bag_rose.2e971f2f7572570997e8.jpg",
     "index.html": "/Homeworks/index.html",
     "main.f7e03f94.css.map": "/Homeworks/static/css/main.f7e03f94.css.map",
-    "main.cb18133c.js.map": "/Homeworks/static/js/main.cb18133c.js.map"
+    "main.d832d84c.js.map": "/Homeworks/static/js/main.d832d84c.js.map"
   },
   "entrypoints": [
     "static/css/main.f7e03f94.css",
-    "static/js/main.cb18133c.js"
+    "static/js/main.d832d84c.js"
   ]
 }
