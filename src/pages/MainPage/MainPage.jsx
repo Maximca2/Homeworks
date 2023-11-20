@@ -61,6 +61,7 @@ const MainPage = () => {
       return arr;
     }
 
+    // eslint-disable-next-line array-callback-return
     arr.filter((it) => {
       const address = Object.values(it.address);
       const company = Object.values(it.company);

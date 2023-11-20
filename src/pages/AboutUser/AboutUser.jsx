@@ -24,7 +24,7 @@ const AboutUser = () => {
 
   useEffect(() => {
     dispatch(fetchCurrentUserforId(userId));
-  }, [dispatch]);
+  }, [dispatch, userId]);
 
   const { name, username, email, address, company, phone, website } = curUser;
   
