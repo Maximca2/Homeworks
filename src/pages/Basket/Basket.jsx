@@ -8,11 +8,13 @@ import style from "./Basket.module.scss";
 const Basket = ({img}) => {
   const dispatch = useDispatch();
   const curProducts = useSelector((state) => state.toolkit.basket);
-
+  
   function deleteIt(id) {
     dispatch(removeUser(id));
   }
+
   return (
+
     <div>
       List of adding workers
       <div className={style.box}>
@@ -27,7 +29,7 @@ const Basket = ({img}) => {
                       <img src={img} alt="curimg" />
                       {name}
                       {price}
-                      <Button className={style.button41}>Купити</Button>
+                      <Button className={style.button41}>Похвалити</Button>
                       <Button
                         onClick={() => deleteIt(id)}
                         className={style.button42}
@@ -42,6 +44,7 @@ const Basket = ({img}) => {
       </div>
     </div>
   );
+
 };
 
 export default Basket;

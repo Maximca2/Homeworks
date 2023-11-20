@@ -1,7 +1,7 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 
-import { ADD_TO,REMOVE_FROM_BASKET,FETCH_USERS,FETCH_USER_ID } from './actions';
+import { ADD_TO, REMOVE_FROM_BASKET, FETCH_USERS, FETCH_USER_ID, REMOVE_FROM_FAVORITES_USER } from './actions';
 
 import imf from '../../img/bag_rose.jpg'
 
@@ -40,45 +40,56 @@ const product = [
 ]
 // DefaultState
 const defaultState = {
-    users:[],
-    curentUser:[],
+    users: [],
+    curentUser: [],
     it: product,
     basket: localStorage.getItem(LOCAL_STORAGE_KEY) ? JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) : [],
 
 }
 // actions
 export const addUser = createAction(ADD_TO);
-export const removeUser =createAction(REMOVE_FROM_BASKET);
+export const removeUser = createAction(REMOVE_FROM_BASKET);
 export const fetchUser = createAction(FETCH_USERS)
 export const fetchUserId = createAction(FETCH_USER_ID)
-
+export const removeFromFavorites = createAction(REMOVE_FROM_FAVORITES_USER)
 //Reducer 
 export const userReducer = createReducer(defaultState, {
 
-    [fetchUser]:function(state,{payload}){
+    [fetchUser]: function (state, { payload }) {
+        payload.forEach(it => {
+            it.changeText = false;
+        })
         state.users.push(payload)
-    },
 
-    [addUser]:function(state,{payload}){
-        const newUser = [...state.basket,payload]
-        state.basket.push(payload)
-       localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(newUser))
-       
     },
-
-    [removeUser]:function(state,{payload}){
+    [removeFromFavorites]: function (state, { payload }) {
         const newBaskets = state.basket.filter(it => it.product.id !== payload)
-        state.basket=newBaskets
-        localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(newBaskets))
-        
+        state.basket = newBaskets
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newBaskets))
+
     },
-    [fetchUserId]:function(state,{payload}){
+
+    [addUser]: function (state, { payload }) {
+        
+        const newUser = [...state.basket, payload]
+        state.basket.push(payload)
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newUser))
+
+    },
+
+    [removeUser]: function (state, { payload }) {
+        const newBaskets = state.basket.filter(it => it.product.id !== payload)
+        state.basket = newBaskets
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newBaskets))
+
+    },
+    [fetchUserId]: function (state, { payload }) {
         const curUser = payload
 
-        state.curentUser=curUser;
+        state.curentUser = curUser;
 
-        
-        
+
+
     },
 })
 

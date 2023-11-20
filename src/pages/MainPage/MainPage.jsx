@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import { NavLink } from "react-router-dom";
 
 import { fetchUsers } from "../../services/servise";
-import { addUser } from "../../redux/store/usersReducer";
+import { addUser, removeFromFavorites } from "../../redux/store/usersReducer";
 import { ROUTE_TO_ABOUT_USER } from "../../routes/routes";
 
 import SkeletonForMainpageCards from "../../components/Skeletons/SkeletonMainPageCards/SkeletonForMainpageCards";
@@ -19,10 +19,10 @@ const imgPerson =
 const MainPage = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.toolkit.users)[0];
+  const favorites = useSelector((state) => state.toolkit.basket);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [show, setShow] = useState(true);
-
-  const curProducts = useSelector((state) => state.toolkit.basket);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -37,13 +37,42 @@ const MainPage = () => {
   const addToCart = (product, i) => {
     const currentProduct = {
       product,
-      data: Date.now(),
     };
+
     dispatch(addUser(currentProduct));
+  };
+
+  const removeFromFavoritess = (id) => {
+    dispatch(removeFromFavorites(id));
   };
 
   function showBasket(cond) {
     setShow(cond);
+  }
+  const setInp = (event) => {
+    const str = event.target.value;
+
+    setInputValue(str);
+  };
+
+  function filteredUser(arr, str) {
+    const arrOfCurUser = [];
+    if (!inputValue) {
+      return arr;
+    }
+
+    arr.filter((it) => {
+      const address = Object.values(it.address);
+      const company = Object.values(it.company);
+      const allValue = Object.values(it).concat(address).concat(company);
+      if (allValue.includes(str)) {
+        arrOfCurUser.push(it);
+      }
+    });
+    if(!arrOfCurUser.length){
+      return arr
+    }
+    return arrOfCurUser;
   }
   return (
     <div>
@@ -55,32 +84,46 @@ const MainPage = () => {
                 className={style.box__nameofCompany}
                 onClick={() => dispatch(fetchUsers())}
               >
-                Bags
+                My Staff
               </div>
             </div>
           </header>
           <main>
             <div className={style.box__list}>
+              <div className={style.input__box}>
+                <label>
+                  Введіть дані користувача!
+                  <input type="text" value={inputValue} onChange={setInp} />
+                </label>
+                <p>Те що ви ввели: {inputValue}</p>
+              </div>
               {!users || showSkeleton ? (
                 <>
                   <SkeletonForMainpageCards cardsLength={4} />
                 </>
               ) : (
-                users.map((it, i) => {
-                  const { name, company, id,} = it;
+                filteredUser(users, inputValue).map((it, i) => {
+                  const { name, company, id } = it;
+                  const isFavorite = favorites.find(
+                    ({ product }) => product.name === it.name
+                  );
                   return (
                     <div key={i} className={style.box__card}>
                       <div className={style.box__img}>
                         <img src={imgPerson} alt="img_bags" />
                       </div>
-                      <div className="">{name}</div>
-                      <div className=""> Company:{company.name}</div>
+                      <div>{name}</div>
+                      <div> Company:{company.name}</div>
 
                       <Button
                         className={style.button41}
-                        onClick={() => addToCart(it, i)}
+                        onClick={
+                          !isFavorite
+                            ? () => addToCart(it, i)
+                            : () => removeFromFavoritess(id)
+                        }
                       >
-                        Add to Project
+                        {isFavorite ? "Remove from project" : "Add to project"}
                       </Button>
 
                       <NavLink
@@ -100,14 +143,12 @@ const MainPage = () => {
           </main>
           <div className={style.box__navigation}>
             <nav>
-              <div className={style.box__search}>Шукати</div>
-              <div className={style.box__search}>Подобається</div>
               className={style.box__search}
               <div
                 onClick={() => showBasket(false)}
                 className={style.box__link}
               >
-                List of workers on Project {curProducts.length}
+                List of workers on Project {favorites.length}
               </div>
             </nav>
           </div>
