@@ -69,6 +69,9 @@ const MainPage = () => {
         arrOfCurUser.push(it);
       }
     });
+    if(!arrOfCurUser.length){
+      return arr
+    }
     return arrOfCurUser;
   }
   return (
@@ -81,7 +84,7 @@ const MainPage = () => {
                 className={style.box__nameofCompany}
                 onClick={() => dispatch(fetchUsers())}
               >
-                Bags
+                My Staff
               </div>
             </div>
           </header>
@@ -89,10 +92,10 @@ const MainPage = () => {
             <div className={style.box__list}>
               <div className={style.input__box}>
                 <label>
-                  Input Value:
+                  Введіть дані користувача!
                   <input type="text" value={inputValue} onChange={setInp} />
                 </label>
-                <p>Input Value: {inputValue}</p>
+                <p>Те що ви ввели: {inputValue}</p>
               </div>
               {!users || showSkeleton ? (
                 <>
@@ -140,8 +143,6 @@ const MainPage = () => {
           </main>
           <div className={style.box__navigation}>
             <nav>
-              <div className={style.box__search}>Шукати</div>
-              <div className={style.box__search}>Подобається</div>
               className={style.box__search}
               <div
                 onClick={() => showBasket(false)}

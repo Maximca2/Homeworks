@@ -29,7 +29,7 @@ const Basket = ({img}) => {
                       <img src={img} alt="curimg" />
                       {name}
                       {price}
-                      <Button className={style.button41}>Купити</Button>
+                      <Button className={style.button41}>Похвалити</Button>
                       <Button
                         onClick={() => deleteIt(id)}
                         className={style.button42}
