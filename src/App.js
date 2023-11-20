@@ -16,7 +16,7 @@ function App() {
       <div className='box'>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          {/* <Route path="*" element={<NotFound />} /> */}
+          <Route path="*" element={<NotFound />} />
           <Route path="/mainpage" element={<MainPage />} />
           <Route path="/user/:userId" element={<AboutUser />} />
         </Routes>
